@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeBonBex – Petites annonces </title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Styles personnalisés -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Configuration Tailwind personnalisée -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#f56b2a',      /* Orange Leboncoin */
+            'primary-dark': '#d4561f',
+            secondary: '#1a1a2e',
+            surface: '#f8f7f5',
+            card: '#ffffff',
+          },
+          fontFamily: {
+            sans: ['Nunito', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-surface font-sans min-h-screen">
+
+  <!-- ===== HEADER ===== -->
+  <header class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-2 flex-shrink-0">
+        <div class="bg-primary rounded-xl px-3 py-1">
+          <span class="text-white font-extrabold text-lg tracking-tight">LeBon<span class="text-yellow-200">Bex</span></span>
+        </div>
+      </a>
+
+      <!-- Barre de recherche -->
+      <div class="flex-1 max-w-xl relative">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Rechercher une annonce..."
+          class="w-full border-2 border-gray-200 rounded-xl px-4 py-2 pr-10 text-sm focus:outline-none focus:border-primary transition"
+        />
+        <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/>
+        </svg>
+      </div>
+
+      <!-- Bouton publier -->
+      <a href="publier.html" class="flex-shrink-0 bg-primary hover:bg-primary-dark text-white font-bold px-5 py-2 rounded-xl text-sm transition shadow-md hover:shadow-lg">
+        + Publier une annonce
+      </a>
+    </div>
+  </header>
+
+  <!-- ===== FILTRES PAR CATÉGORIE ===== -->
+  <div class="bg-white border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex gap-2 overflow-x-auto scrollbar-hide">
+      <!-- Les filtres sont injectés dynamiquement par app.js -->
+      <div id="categoryFilters" class="flex gap-2 flex-nowrap"></div>
+    </div>
+  </div>
+
+  <!-- ===== CONTENU PRINCIPAL ===== -->
+  <main class="max-w-7xl mx-auto px-4 py-6">
+
+    <!-- Compteur de résultats -->
+    <div class="flex items-center justify-between mb-4">
+      <p id="resultCount" class="text-sm text-gray-500 font-semibold"></p>
+      <!-- Tri -->
+      <select id="sortSelect" class="text-sm border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:border-primary">
+        <option value="recent">Plus récentes</option>
+        <option value="price-asc">Prix croissant</option>
+        <option value="price-desc">Prix décroissant</option>
+      </select>
+    </div>
+
+    <!-- Grille d'annonces -->
+    <div id="annoncesGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+      <!-- Squelettes de chargement -->
+      <div class="skeleton-card rounded-2xl overflow-hidden animate-pulse bg-gray-100 h-64"></div>
+      <div class="skeleton-card rounded-2xl overflow-hidden animate-pulse bg-gray-100 h-64"></div>
+      <div class="skeleton-card rounded-2xl overflow-hidden animate-pulse bg-gray-100 h-64"></div>
+      <div class="skeleton-card rounded-2xl overflow-hidden animate-pulse bg-gray-100 h-64"></div>
+      <div class="skeleton-card rounded-2xl overflow-hidden animate-pulse bg-gray-100 h-64"></div>
+    </div>
+
+    <!-- Message vide -->
+    <div id="emptyState" class="hidden text-center py-20">
+      <div class="text-6xl mb-4">🔍</div>
+      <h3 class="text-xl font-bold text-gray-700 mb-2">Aucune annonce trouvée</h3>
+      <p class="text-gray-400 mb-6">Essayez d'autres mots-clés ou changez de catégorie.</p>
+      <a href="publier.html" class="bg-primary text-white font-bold px-6 py-3 rounded-xl hover:bg-primary-dark transition">
+        Publier la première annonce
+      </a>
+    </div>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="text-center text-xs text-gray-400 py-8 mt-8 border-t border-gray-100">
+    LeBonBex — Adam Bounou.
+  </footer>
+
+  <!-- Firebase SDK -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
